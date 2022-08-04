@@ -1,0 +1,61 @@
+# API GIMNASIO
+
+## PASOS PARA CREACION DE LA API
+
+-iniciar proyecto (https://docs.npmjs.com/cli/v8/commands/npm-init)
+    --Create a package.json file 
+        $ npm init
+    --Generate it without having it ask any questions
+        $ npm init -y
+
+-instalar las extensiones en visual studio code: Prettier y ESLint
+
+-instalar paquetes de Desarrollo 
+    --eslint: detecta errores en nuestro codigo (https://www.npmjs.com/package/eslint)
+    --prettier: aplicar formato (espacios, saltos de linea...) a nuestro codigo (https://www.npmjs.com/package/prettier)
+
+        $ npm install -D eslint prettier
+
+    --.gitignore: para no subir ciertos archivos al repositorio como node_modules o .env (por ser pesados o por contener contraseñas)
+
+    -configurar eslint
+        $ npx eslint --init
+            To check sintax and find problems
+            CommonJS (require/export)
+            None of these
+            No
+            Node
+            JSON
+
+        Para proyectos con express añadir esta linea en .eslintrc.json
+        "rules": {
+            "no-unused-vars": ["error", {"argsIgnorePattern": "next"}]
+        }
+
+    -crear .prettierrc.json
+        {
+            "trailingComma": "es5",
+            "tabWidth": 2,
+            "semi": true,
+            "singleQuote": true
+        }
+
+-instalar mysql2 (https://www.npmjs.com/package/mysql2)
+-instalar dotenv (https://www.npmjs.com/package/dotenv)
+    $ npm install mysql2 dotenv
+
+
+-crear archivo .env
+    MYSQL_HOST=string
+    MYSQL_USER=string
+    MYSQL_PASSWORD=string
+    MYSQL_DATABASE=string
+
+-pool de conexiones: 10 conexiones disponibles (db.js o mysql-pool.js) archivo igual en el 99% de los casos
+
+-archivo crear bases de datos: (initdb.js) en clase las bases de datos las creamos a traves del workbench
+
+
+-npm i path
+-npm i cors
+-npm i express
