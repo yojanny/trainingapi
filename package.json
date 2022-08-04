@@ -1,0 +1,24 @@
+{
+  "name": "trainingapi",
+  "version": "1.0.0",
+  "description": "Api de entrenamiento de gimnasio para creación y modificación de ejercicios de entrenamientos para un gimnasio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yojanny/trainingapi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yojanny/trainingapi/issues"
+  },
+  "homepage": "https://github.com/yojanny/trainingapi#readme",
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "prettier": "^2.7.1"
+  }
+}
