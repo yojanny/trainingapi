@@ -66,7 +66,10 @@ estructura de archivos
     -index.js --> conexion con mysql e inicializar el servidor web
     -carpeta app
         -carpeta database
-            -carpeta mysql pool
+            -carpeta mysql-pool
                 -mysql-pool.js --> pool de conexiones para poder conectarnos a la base de datos con las variables de entorno
         -carpeta webserver
             -index.js
+
+-npm i joi
+-npm i bcrypt
