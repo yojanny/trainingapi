@@ -51,7 +51,7 @@
     MYSQL_PASSWORD=string
     MYSQL_DATABASE=string
 
--pool de conexiones: 10 conexiones disponibles (db.js o mysql-pool.js) archivo igual en el 99% de los casos
+-archivo pool de conexiones: 10 conexiones disponibles (db.js o mysql-pool.js) archivo igual en el 99% de los casos
 
 -archivo crear bases de datos: (initdb.js) en clase las bases de datos las creamos a traves del workbench
 
@@ -59,3 +59,14 @@
 -npm i path
 -npm i cors
 -npm i express
+
+estructura de archivos
+
+-carpeta API
+    -index.js --> conexion con mysql e inicializar el servidor web
+    -carpeta app
+        -carpeta database
+            -carpeta mysql pool
+                -mysql-pool.js --> pool de conexiones para poder conectarnos a la base de datos con las variables de entorno
+        -carpeta webserver
+            -index.js
