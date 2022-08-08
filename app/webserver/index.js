@@ -7,7 +7,7 @@
 
 const express = require('express');
 
-const accountRouter = require('./routes/account-router.js');
+const accountRouter = require('./routes/account-router');
 /* 
 Aqui irian el resto de routers
 */
