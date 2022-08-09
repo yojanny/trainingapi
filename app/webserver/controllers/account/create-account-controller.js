@@ -4,7 +4,6 @@
 const bcrypt = require('bcrypt');
 //validar el email y la contraseña
 const Joi = require('joi');
-const { JsonWebTokenError } = require('jsonwebtoken');
 
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
 
@@ -40,7 +39,7 @@ async function createAccount(req, res){
 
         const securePassword = await bcrypt.hash (accountData.password, 10)
 
-        const secureRole = await bcrypt.hash (accountData.role, 10);
+        const secureRole = await bcrypt.hash ('accountData.role', 10);
 
         const user = {
             email: accountData.email,
