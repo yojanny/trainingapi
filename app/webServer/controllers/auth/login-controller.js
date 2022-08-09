@@ -29,7 +29,7 @@ async function login(req, res, next){
     }
 
     const sqlQuery = `SELECT id, email, password FROM users
-    WHERE email = ${accountData.email}`;
+    WHERE email = '${accountData.email}'`;
 
     let connection = null;
 

@@ -1,9 +1,11 @@
-'use strict'
-
-const express = require('express');
+const app = require('express');
+const router = app.Router();
 const createAccount = require('../controllers/account/create-account-controller');
-const router = express.Router();
+
+router.get('/user', function (req, res, next) {
+    res.send('USER');
+  });
 
 router.post('/accounts', createAccount);
 
-module.exports = router;
+  module.exports = router;

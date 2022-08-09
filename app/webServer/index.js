@@ -10,8 +10,8 @@ const express = require('express');
 const app = express();
 
 //const router = require('./router/accountRouter');
-const router = require('./router/test');
-const authRouter = require('./routes/auth-router');
+const router = require('./router/accountRouter');
+const authRouter = require('./router/auth-router');
 
 /* 
 Aqui irian el resto de routers
