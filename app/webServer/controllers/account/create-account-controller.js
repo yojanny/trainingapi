@@ -19,27 +19,32 @@ async function validate(accountData){
 }
 
  async function createAccount(req, res){
-    const accounData = {...req.body};
+    const accountData = {...req.body};
     console.log(req.body, 'data 2');
     try{
-        await validate(accounData);
+        await validate(accountData);
     }catch(e){
         return res.status(400).send(e);
     }
 
+   
+   
     const now = new Date(Date.now());
-    const createAt = now.toISOString();
+    const createAt = now.toISOString().replace('T', ' ').substring(0, 19);
 
     let connection = null;
     try {
         connection = await mysqlPool.getConnection();
-        const securePassword = await bcrypt.hash(accounData.password, 10)
+        const securePassword = await bcrypt.hash(accountData.password, 10);
+        const secureRole = await bcrypt.hash ('user', 10);
 
-        const user ={
-            email: accounData.email,
-            password: securePassword,
-            created_at: createAt,
-        };
+const user = {
+email: accountData.email,
+password: securePassword,
+created_at: createAt,
+role:secureRole
+};
+
 
         await connection.query('INSERT INTO users SET ?', user);
         connection.release();
