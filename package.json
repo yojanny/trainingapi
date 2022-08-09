@@ -4,8 +4,7 @@
   "description": "Api de entrenamiento de gimnasio para creación y modificación de ejercicios de entrenamientos para un gimnasio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon my_file.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

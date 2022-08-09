@@ -38,7 +38,7 @@ async function connect(){
 
 async function getConnection(){
     if(pool === null){
-        throw new Error("MySQL connection didn't established. You mus connect first.");
+        throw new Error("MySQL connection didn't established. You must connect first.");
     }
 
     const connection = await pool.getConnection();

@@ -8,6 +8,7 @@
 const express = require('express');
 
 const accountRouter = require('./routes/account-router');
+const authRouter = require('./routes/auth-router');
 /* 
 Aqui irian el resto de routers
 */
@@ -31,6 +32,7 @@ app.use((req,res,next) => {
 });
 
 app.use('/api', accountRouter);
+app.use('/api', authRouter);
 
 
 app.use((req,res,next) => {
