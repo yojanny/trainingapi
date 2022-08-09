@@ -73,3 +73,5 @@ estructura de archivos
 
 -npm i joi
 -npm i bcrypt
+-npm i nodemon -D
+-npm i jsonwebtoken

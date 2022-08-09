@@ -32,6 +32,7 @@ app.use((req,res,next) => {
 
 app.use('/api', accountRouter);
 
+
 app.use((req,res,next) => {
     console.log('AQUÍ NO ENTRA NUNCA', req.url);
 

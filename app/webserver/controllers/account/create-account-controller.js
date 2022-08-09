@@ -38,10 +38,13 @@ async function createAccount(req, res){
 
         const securePassword = await bcrypt.hash (accountData.password, 10)
 
+        const secureRole = await bcrypt.hash ('user', 10);
+
         const user = {
             email: accountData.email,
             password: securePassword,
             created_at: createdAt,
+            role:secureRole
         };
 
         await connection.query('INSERT INTO users SET ?', user);
