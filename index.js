@@ -3,7 +3,7 @@
 require('dotenv').config();
 
 //conectarse a mysql
-const mysqlPool = require('./app/database/mysql-pool');
+const mysqlPool = require('./app/database/mysql-pool/mysql-pool.js');
 
 //Inicializando el servidor web
 const webServer = require('./app/webServer');

@@ -1,46 +1,41 @@
 'use strict';
 
-const path = require('path');
+//modulo para que cambie el caracter de separacion de las rutas segun el sistema operativo
+//const path = require('path');
 
 //const cors = require('cors');
 
 const express = require('express');
 
-const accountRouter = require('.router/account-router');
+const app = express();
+
+//const router = require('./router/accountRouter');
+const router = require('./router/test');
+
+/* 
+Aqui irian el resto de routers
+*/
 
 //Aqui irian el resto de routers
 
-const app = express();
 
-//Linea para imagenes
+
+/* Linea para imagenes */
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-    console.log('1.entrando request', req.url);
-    next();
-});
+// app.use('/api', router);
 
-app.use((req,res,next) =>{
-    console.log('2.continuando request', req.url);
+app.use('/api', router);
 
-    next();
-});
 
-app.use('/api', accountRouter);
-
-app.use((req,res,next) =>{
-    console.log('AQUI NO ETRA NUNCA', req.url);
-
-    return res.status(404).send();
-});
 
 async function listen(port){
-    const server = await app.listen(port);
+const server = await app.listen(port);
 
-    return server;
+return server;
 }
 
-module.exports ={
-    listen,
-};
+module.exports = {
+listen,
+}; 
