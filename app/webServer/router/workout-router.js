@@ -9,10 +9,16 @@ const checkAccountSession = require('../controllers/account/check-account-sessio
 
 const createWorkout = require('../controllers/workout/create-workout-controller');
 
+const deleteWorkout = require('../controllers/workout/delete-workout-controller');
+
+const deleteWorkout = require('../controllers/workout/delete-workout-controller');
+
 const upload = multer();
 
 const router = express.Router();
 
-router.post('/workout', checkAccountSession, upload.single('image'), createWorkout);
+router.post('/workouts', checkAccountSession, upload.single('image'), createWorkout);
+
+router.delete('/workouts/:workoutId', checkAccountSession, deleteWorkout);
 
 module.exports = router;
