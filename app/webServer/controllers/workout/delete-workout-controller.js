@@ -13,7 +13,7 @@ async function validate(payload){
     }
 
     async function deleteWorkout(req, res){
-        const { userId } = req.claims;
+        const {userId} = req.claims;
         const workoutId = req.params.workoutId;
 
         try{
@@ -29,7 +29,8 @@ async function validate(payload){
         let connection = null;
 
         try{
-            const query = `DELETE FROM ejercicio WHERE user_id = ? AND ejercicio_id = ?`;
+            const query = `DELETE FROM ejercicio WHERE user_id = ? AND 
+            id = ?`;
             connection = await mysqlPool.getConnection();
             await connection.execute(query, [userId, workoutId]);
             connection.release();

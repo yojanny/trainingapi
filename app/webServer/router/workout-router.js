@@ -11,7 +11,6 @@ const createWorkout = require('../controllers/workout/create-workout-controller'
 
 const deleteWorkout = require('../controllers/workout/delete-workout-controller');
 
-const deleteWorkout = require('../controllers/workout/delete-workout-controller');
 
 const upload = multer();
 

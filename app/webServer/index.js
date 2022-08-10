@@ -12,7 +12,7 @@ const app = express();
 //const router = require('./router/accountRouter');
 const router = require('./router/accountRouter');
 const authRouter = require('./router/auth-router');
-
+const workoutRouter = require('./router/workout-router');
 /* 
 Aqui irian el resto de routers
 */
@@ -29,6 +29,7 @@ app.use(express.json());
 
 app.use('/api', router);
 app.use('/api', authRouter);
+app.use('/api', workoutRouter);
 
 
 
