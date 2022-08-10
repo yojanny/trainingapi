@@ -13,6 +13,6 @@ const upload = multer();
 
 const router = express.Router();
 
-router.post('/workout', checkAccountSession, upload.single('image'), createWorkout);
+router.post('/workouts', checkAccountSession, upload.single('image'), createWorkout);
 
 module.exports = router;

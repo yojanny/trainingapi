@@ -15,6 +15,7 @@ async function main(){
         connection = await mysqlPool.getConnection();
 
         console.log('Borrando tablas existentes');
+
         await connection.query('DROP TABLE IF EXISTS favorito');
         await connection.query('DROP TABLE IF EXISTS ejercicio');
         await connection.query('DROP TABLE IF EXISTS users');
@@ -33,8 +34,8 @@ async function main(){
           );
           `);
 
-          await connection.query(`
-          CREATE TABLE ejercicio (
+        await connection.query(`
+        CREATE TABLE ejercicio (
             id INT UNSIGNED NOT NULL AUTO_INCREMENT,
             name VARCHAR(60) NOT NULL,
             description VARCHAR(255),
@@ -52,8 +53,8 @@ async function main(){
           );
           `);
 
-          await connection.query(`
-          CREATE TABLE favorito (
+        await connection.query(`
+        CREATE TABLE favorito (
             user_id INT UNSIGNED NOT NULL,
             ejercicio_id INT UNSIGNED NOT NULL,
             created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -67,7 +68,7 @@ async function main(){
               ON DELETE NO ACTION
               ON UPDATE NO ACTION
           );
-          `);           
+          `);
 
     }catch(error){
         console.error(error);

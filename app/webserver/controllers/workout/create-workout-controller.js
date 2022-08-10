@@ -16,6 +16,9 @@ async function createWorkout(req, res, next) {
   const userId = req.claims.userId; // const { userId } = req.claims;
   const file = req.file; // const { file } = req;
   const description = req.body.description || null;
+  const name = req.body.name;
+  const typology = req.body.typology;
+  const muscle = req.body.muscle;
 
   /**
    * 1. validar datos (imagen)
@@ -63,15 +66,18 @@ async function createWorkout(req, res, next) {
   let connection;
   try {
     const now = new Date();
-    const post = {
+    const workout = {
+      name,
       description,  // description: caption
       image: imageFileName,
+      typology,
+      muscle,
       created_at: now,
       user_id: userId,
     };
 
     connection = await mysqlPool.getConnection();
-    await connection.query('INSERT INTO ejercicio SET ?', post);
+    await connection.query('INSERT INTO ejercicio SET ?', workout);
     connection.release();
 
     res.header('Location', `${process.env.HTTP_SERVER_DOMAIN}/uploads/workout/${userId}/${imageFileName}`);

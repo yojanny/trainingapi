@@ -11,7 +11,6 @@ async function validate(accountData){
     const schema = Joi.object({
         email: Joi.string().email().required(),
         password: Joi.string().alphanum().min(3).max(30).required(),
-        role: Joi.string().valid('user','administrator').required(),
     });
 
     //Comprobar que un valor (accounData) coincide con el schema que nosotros definimos arriba (funcion validate)
@@ -39,7 +38,7 @@ async function createAccount(req, res){
 
         const securePassword = await bcrypt.hash (accountData.password, 10)
 
-        const secureRole = await bcrypt.hash ('accountData.role', 10);
+        const secureRole = await bcrypt.hash ('user', 10);
 
         const user = {
             email: accountData.email,
