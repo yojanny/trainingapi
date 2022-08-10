@@ -19,10 +19,14 @@ async function validate(accountData){
 }
 
  async function createAccount(req, res){
+
     const accountData = {...req.body};
+
     console.log(req.body, 'data 2');
+
     try{
         await validate(accountData);
+
     }catch(e){
         return res.status(400).send(e);
     }
@@ -30,12 +34,15 @@ async function validate(accountData){
    
    
     const now = new Date(Date.now());
+
     const createAt = now.toISOString().replace('T', ' ').substring(0, 19);
 
     let connection = null;
     try {
         connection = await mysqlPool.getConnection();
+
         const securePassword = await bcrypt.hash(accountData.password, 10);
+        
         const secureRole = await bcrypt.hash ('user', 10);
 
 const user = {
