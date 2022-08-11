@@ -9,7 +9,7 @@ const express = require('express');
 
 const accountRouter = require('./routes/account-router');
 const authRouter = require('./routes/auth-router');
-const workoutRouter = require('./routes/workout-router')
+const workoutRouter = require('./routes/workout-router');
 /* 
 Aqui irian el resto de routers
 */
