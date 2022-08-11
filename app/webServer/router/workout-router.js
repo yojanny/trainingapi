@@ -15,6 +15,12 @@ const getWorkouts = require('../controllers/workout/get-workouts-controller');
 
 const getWorkoutDetails = require('../controllers/workout/get-workouts-details-controller');
 
+const getWorkoutFilter = require('../controllers/workout/get-workout-filter-controller');
+
+const postLike = require('../controllers/workout/post-like-controller');
+
+const deleteLike = require('../controllers/workout/delete-like-controller');
+
 const upload = multer();
 
 const router = express.Router();
@@ -26,5 +32,11 @@ router.delete('/workouts/:workoutId', checkAccountSession, deleteWorkout);
 router.get('/workouts', checkAccountSession, getWorkouts);
 
 router.get('/workouts/:id', checkAccountSession,getWorkoutDetails);
+
+router.get('/workout/:workoutParam', checkAccountSession, getWorkoutFilter);
+
+router.post('/workout/:workoutId/like', checkAccountSession, postLike);
+
+router.delete('/workout/:workoutId/like', checkAccountSession, deleteLike );
 
 module.exports = router;
