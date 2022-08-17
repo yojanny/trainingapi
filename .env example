@@ -1,0 +1,15 @@
+PORT=9002
+
+#
+#MySQL Database data
+#
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=root
+MYSQL_DATABASE=trainingproject
+
+#
+#jwt config
+#
+AUTH_JWT_SECRET = aRandomString
+JWT_EXPIRES_IN = 3600
