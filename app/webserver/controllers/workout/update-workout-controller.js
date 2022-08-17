@@ -31,7 +31,6 @@ async function updateWorkout(req, res, next){
 
         if(workout[key]){
             query+= `${key} = '${workout[key]}', `;
-
         }   
 
     });
@@ -55,7 +54,6 @@ async function updateWorkout(req, res, next){
         if(connection){
             connection.release();
         }
-
         console.error(e);
         return res.status(500).send(e.message);
     }
