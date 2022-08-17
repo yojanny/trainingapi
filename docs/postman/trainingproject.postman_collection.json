@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "9b7bb06b-d5f4-4930-aa70-f6db93fccea2",
+		"name": "trainingproject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21957271"
+	},
+	"item": [
+		{
+			"name": "accounts",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"hab10007@yopmail.com\",\n    \"password\": \"MySecurePassword1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/api/accounts",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"accessToken\", res.json().accessToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"hab10006@yopmail.com\",\n    \"password\": \"MySecurePassword1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/api/auth",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workouts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/home/priobbas/test/mi-repositorio/JSCB/AHORCADO/Repositorio/imagenes_ahorcado/hangman0.png"
+						},
+						{
+							"key": "name",
+							"value": "Flexiones",
+							"type": "text"
+						},
+						{
+							"key": "typology",
+							"value": "Suelo",
+							"type": "text"
+						},
+						{
+							"key": "muscle",
+							"value": "Pecho",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Flexionar los brazos",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}:{{port}}/api/workouts",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"workouts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workouts/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}:{{port}}/api/workouts/1",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"workouts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workouts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTY2MDE1MjA1NSwiZXhwIjoxNjYwMTU1NjU1fQ.VuzA-mx5MopIjWsYX7qyvpn-9AaV-5FVaIDjmKohng0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9002/api/workouts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"api",
+						"workouts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workouts/:id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTY2MDE1MjA1NSwiZXhwIjoxNjYwMTU1NjU1fQ.VuzA-mx5MopIjWsYX7qyvpn-9AaV-5FVaIDjmKohng0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9002/api/workouts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"api",
+						"workouts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workout/:param",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "/workout/:id/like",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTY2MDIwOTc1NiwiZXhwIjoxNjYwMjEzMzU2fQ.5ktKN1fD6HJHICilYehzs8w2HxTzuZTuG6OoqPzHIwQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9002/api/workout/4/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9002",
+					"path": [
+						"api",
+						"workout",
+						"4",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workout/:id/like",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTY2MDIxMzUxNCwiZXhwIjoxNjYwMjE3MTE0fQ.wYpLvh0Ya1Tksh5oBFicLK3NUrRcBZbeFuCFO-O1bZo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/workout/4/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"workout",
+						"4",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/workout/:id",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTY2MDIzMTk2MywiZXhwIjoxNjYwMjM1NTYzfQ.eh0YtZmoY5cbejWSOoac7N9FuWim-mv4Y6xLvijJAYw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "ahorcadoModificado",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "descriptionModificada",
+							"type": "text"
+						},
+						{
+							"key": "muscle",
+							"value": "muscleModificado",
+							"type": "text"
+						},
+						{
+							"key": "typology",
+							"value": "typologyModificado",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/workout/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"workout",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
