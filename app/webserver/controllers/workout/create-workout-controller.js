@@ -20,6 +20,8 @@ async function createWorkout(req, res, next) {
   const typology = req.body.typology;
   const muscle = req.body.muscle;
 
+  console.log(req.body);
+
   /**
    * 1. validar datos (imagen)
    * 2. guardar foto en disco duro
