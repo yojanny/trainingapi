@@ -2,8 +2,6 @@
 
 require('dotenv').config();
 
-//console.log(process.env); //si ejecutamos este js desde este directorio (consola: node initDB.js) no vemos las variables de entorno (que valoramos en el .env), por eso siempre hay que ejecutar desde la raiz del proyecto (consola: node db/initDB.js)
-
 const mysqlPool = require ('../database/mysql-pool/mysql-pool');
 
 async function main(){

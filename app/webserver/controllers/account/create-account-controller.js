@@ -1,8 +1,6 @@
 'use strict';
 
-//para codificar las contraseñas y poder guardarlas en la base de datos
 const bcrypt = require('bcrypt');
-//validar el email y la contraseña
 const Joi = require('joi');
 
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
@@ -13,7 +11,6 @@ async function validate(accountData){
         password: Joi.string().alphanum().min(3).max(30).required(),
     });
 
-    //Comprobar que un valor (accounData) coincide con el schema que nosotros definimos arriba (funcion validate)
     Joi.assert(accountData, schema);
 }
 
@@ -38,13 +35,15 @@ async function createAccount(req, res){
 
         const securePassword = await bcrypt.hash (accountData.password, 10)
 
-        const secureRole = await bcrypt.hash ('user', 10);
+        //const secureRole = await bcrypt.hash ('user', 10);
+        //const secureRole = await bcrypt.hash ('admin', 10);
 
         const user = {
             email: accountData.email,
             password: securePassword,
             created_at: createdAt,
-            role:secureRole
+            //role:"admin",
+            role:"member",
         };
 
         await connection.query('INSERT INTO users SET ?', user);

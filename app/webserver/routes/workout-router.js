@@ -23,11 +23,13 @@ const deleteLike = require('../controllers/workout/delete-like-controller');
 
 const updateWorkout = require('../controllers/workout/update-workout-controller');
 
+const checkAccountPermissions = require('../controllers/account/check-account-permissions');
+
 const upload = multer();
 
 const router = express.Router();
 
-router.post('/workouts', checkAccountSession, upload.single('image'), createWorkout);
+router.post('/workouts', checkAccountSession, checkAccountPermissions, upload.single('image'), createWorkout);
 
 router.delete('/workouts/:workoutId', checkAccountSession,deleteWorkout);
 

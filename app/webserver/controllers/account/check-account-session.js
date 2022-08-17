@@ -25,7 +25,7 @@ async function checkAccountSession(req, res, next) {
 
         req.claims = {
             userId: payload.userId,
-            role: payload.role || null,
+            role: payload.role,
         };
 
         return next();

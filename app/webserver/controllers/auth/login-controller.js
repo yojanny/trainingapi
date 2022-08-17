@@ -27,7 +27,7 @@ async function login(req, res, next){
         return res.status(400).send(e);
     }
 
-    const sqlQuery = `SELECT id, email, password
+    const sqlQuery = `SELECT id, email, password, role
     FROM users
     WHERE email = '${accountData.email}'`;
 
@@ -52,6 +52,7 @@ async function login(req, res, next){
 
         const payloadJwt = {
             userId: user.id,
+            role: user.role,
         };
 
         const token = jwt.sign(payloadJwt, authJwtSecret, {expiresIn: jwtExpiresIn});
