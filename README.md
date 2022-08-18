@@ -26,7 +26,7 @@ API para creación y modificación de ejercicios de entrenamiento para un gimnas
 
 ## ENDPOINTS
 
-- POST /accounts Registro de usuario
+- POST /accounts Registro de usuario (los administradores se deben insertar en la bases de datos con su rol de "admin")
 - POST /auth Login de usuario (devuelve el token)
 - POST /workouts Creación de ejercicio (solo admin)
 - DELETE /workouts/:id Eliminación de ejercicio (solo admin)

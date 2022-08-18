@@ -35,13 +35,12 @@ async function createAccount(req, res){
 
         const securePassword = await bcrypt.hash (accountData.password, 10)
 
-        //const secureRole = await bcrypt.hash ('user', 10);
-        //const secureRole = await bcrypt.hash ('admin', 10);
-
+        
         const user = {
             email: accountData.email,
             password: securePassword,
             created_at: createdAt,
+            //en el objeto user, que son los datos del usuario que se insertan en la base de datos, se debe descomentar la linea 45 y comentar la linea 46 del atributo "role" si se quiera insertar un administrador
             //role:"admin",
             role:"member",
         };
