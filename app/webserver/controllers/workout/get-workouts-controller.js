@@ -2,31 +2,25 @@
 
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
 
-async function getWorkouts(req, res){
-    
-    const query = `SELECT name FROM ejercicio`;
+async function getWorkouts(req, res) {
+  const query = `SELECT name, id FROM ejercicio`;
 
-    let connection = null;
-    try{
-        connection = await mysqlPool.getConnection();
+  let connection = null;
+  try {
+    connection = await mysqlPool.getConnection();
 
-        const [workoutData] = await connection.execute(query);
-        connection.release();
-        
-        if(!workoutData){
-            return res.status(500).send();
-        }
-        
-        return res.status(200).send(workoutData);
-        
-    }catch(e){
-        if(connection){
-            connection.release();
-        }
+    const [workoutList] = await connection.execute(query);
+    connection.release();
 
-        console.error(e);
-        return res.status(500).send(e.message);
+    return res
+      .status(200)
+      .send([{ status: 200, message: 'workouts listed' }, { workoutList }]);
+  } catch (e) {
+    if (connection) {
+      connection.release();
     }
+    return res.status(500).send([{ status: 500, message: e.message }]);
+  }
 }
 
 module.exports = getWorkouts;

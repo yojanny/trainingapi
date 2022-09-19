@@ -1,33 +1,52 @@
 'use strict';
 
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
+const { validateWorkoutId } = require('../../shared/validate-schemas');
 
-async function getWorkoutDetails(req, res){
-    const workoutId = req.params.workoutId;
+async function getWorkoutDetails(req, res) {
+  const { workoutId } = req.params;
 
-    const query = `SELECT * FROM ejercicio WHERE id = ?`;
+  try {
+    const datosAvalidar = { workoutId };
+    await validateWorkoutId(datosAvalidar);
+  } catch (e) {
+    return res
+      .status(400)
+      .send([{ status: '400', message: e.details[0].message }]);
+  }
 
-    let connection = null;
-    try{
-        connection = await mysqlPool.getConnection();
+  const query = `SELECT * FROM ejercicio WHERE id = ?`;
 
-        const [workoutData] = await connection.execute(query,[workoutId]);
-        connection.release();
+  let connection = null;
+  try {
+    connection = await mysqlPool.getConnection();
 
-        if(!workoutData){
-            return res.status(500).send();
-        }
-        
-        return res.status(200).send(workoutData);
-        
-    }catch(e){
-        if(connection){
-            connection.release();
-        }
+    const [rows] = await connection.execute(query, [workoutId]);
+    connection.release();
 
-        console.error(e);
-        return res.status(500).send(e.message);
+    const { affectedRows } = rows;
+
+    if (affectedRows === 0) {
+      return res.status(404).send([
+        { status: '404', message: "workout doesn't exist" },
+        {
+          ...workoutId,
+        },
+      ]);
     }
+
+    const { user_id, ...workoutDetails } = rows[0];
+    return res
+      .status(200)
+      .send([{ status: 200, message: 'workout listed' }, workoutDetails]);
+  } catch (e) {
+    if (connection) {
+      connection.release();
+    }
+
+    console.error(e);
+    return res.status(500).send([{ status: 500, message: e.message }]);
+  }
 }
 
 module.exports = getWorkoutDetails;
