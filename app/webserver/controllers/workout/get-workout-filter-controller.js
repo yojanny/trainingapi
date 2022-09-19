@@ -3,20 +3,35 @@
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
 
 async function getWorkoutFilter(req, res) {
+  const { workoutFilter } = req.params;
   const { workoutParam } = req.params;
 
-  const query = `SELECT * FROM ejercicio WHERE muscle = ?`;
+  /* let query = `SELECT * FROM ejercicio WHERE ${workoutFilter} = ?`; */
+
+  let query = '';
 
   let connection = null;
   try {
     connection = await mysqlPool.getConnection();
 
-    const [workoutData] = await connection.execute(query, [workoutParam]);
+    const workoutFiltered = await connection.query(
+      `SELECT * FROM ejercicio WHERE ${workoutFilter} = ?`,
+      workoutParam
+    );
+
+    /* const [workoutData] = await connection.execute(
+      query,
+      [workoutFilter],
+      [workoutParam]
+    ); */
     connection.release();
 
     return res
       .status(200)
-      .send([{ status: 200, message: 'workouts filtered' }, workoutData]);
+      .send([
+        { status: 200, message: 'workouts filtered' },
+        workoutFiltered[0],
+      ]);
   } catch (e) {
     if (connection) {
       connection.release();
