@@ -35,7 +35,6 @@ async function updateWorkout(req, res, next) {
       .send([{ status: '400', message: e.details[0].message }]);
   }
 
-<<<<<<< HEAD
   let imageFileName = null;
   let metadata = null;
   if (file || file?.buffer) {
@@ -52,37 +51,6 @@ async function updateWorkout(req, res, next) {
           message: `image format must be one of these: ${POST_VALID_FORMATS}`,
         },
       ]);
-=======
-    Object.keys(workout).forEach(key =>{
-
-        if(workout[key]){
-            query+= `${key} = '${workout[key]}', `;
-        }   
-
-    });
-
-    console.log(workout, "valor");
-
-    let connection = null;
-    try{
-
-        connection = await mysqlPool.getConnection();
-
-        // remove last comma:
-        const removeLastComma = query.slice(0, query.length - 2);
-
-        await connection.query(`UPDATE ejercicio SET ${removeLastComma} WHERE id = ?`, +workoutId);
-        
-        connection.release();
-
-        return res.status(201).send();
-    }catch(e){
-        if(connection){
-            connection.release();
-        }
-        console.error(e);
-        return res.status(500).send(e.message);
->>>>>>> a5f0e7ef377daaf31890dc15076547c65fbbd2bc
     }
 
     try {
