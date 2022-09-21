@@ -3,94 +3,116 @@
 const fs = require('fs/promises');
 const path = require('path');
 const sharp = require('sharp');
-const v4 = require('uuid').v4; // const { v4 } = require('uuid');
+const { v4 } = require('uuid');
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
+
+const { validateWorkout } = require('../../shared/validate-schemas');
 
 const POST_VALID_FORMATS = ['jpeg', 'png'];
 const MAX_IMAGE_WIDTH = 600;
 
-const PROJECT_MAIN_FOLDER_PATH = process.cwd(); // donde esta el folder principal (vamos, donde esta el index.js principal y la carpeta public)
-const POST_FOLDER_PATH = path.join(PROJECT_MAIN_FOLDER_PATH, 'public', 'uploads', 'posts');
+const PROJECT_MAIN_FOLDER_PATH = process.cwd();
+const POST_FOLDER_PATH = path.join(
+  PROJECT_MAIN_FOLDER_PATH,
+  'public',
+  'uploads',
+  'workouts'
+);
 
 async function createWorkout(req, res, next) {
-  const userId = req.claims.userId; // const { userId } = req.claims;
-  const file = req.file; // const { file } = req;
-  const description = req.body.description || null;
-  const name = req.body.name;
-  const typology = req.body.typology;
-  const muscle = req.body.muscle;
+  const { userId } = req.claims;
+  const { description, name, typology, muscle } = req.body || null;
+  const { file } = req;
 
-  console.log(req.body);
+  const workoutData = { description, name, typology, muscle };
 
-  /**
-   * 1. validar datos (imagen)
-   * 2. guardar foto en disco duro
-   * 3. Insertar post en la bbdd
-   */
-
-  if (!file || !file.buffer) {
-    return res.status(400).send({
-      message: 'invalid message',
-    });
+  try {
+    await validateWorkout(workoutData);
+  } catch (e) {
+    return res
+      .status(400)
+      .send([{ status: '400', message: e.details[0].message }]);
   }
 
-  // 2. guardar imagen en disco duro Y redimensionar si es mayor a 600px
+  if (!file || !file.buffer) {
+    return res.status(400).send([
+      {
+        status: '400',
+        message: 'photo not found',
+      },
+    ]);
+  }
+
   let imageFileName = null;
+  let metadata = null;
+  let image = sharp(file.buffer);
   try {
-    const image = sharp(file.buffer);
-    const metadata = await image.metadata();
-
+    metadata = await image.metadata();
     if (!POST_VALID_FORMATS.includes(metadata.format)) {
-      return res.status(400).send(`Error, iamge format must be one of: ${POST_VALID_FORMATS}`);
+      throw new Error();
     }
+  } catch (e) {
+    return res.status(400).send([
+      {
+        status: '400',
+        message: `image format must be one of these: ${POST_VALID_FORMATS}`,
+      },
+    ]);
+  }
 
+  try {
     if (metadata.width > MAX_IMAGE_WIDTH) {
       image.resize(MAX_IMAGE_WIDTH);
     }
 
-    /**
-     * Para el nombre de la foto, usaremos un uuid v4 concatenado con la extension de la imagen
-     */
     imageFileName = `${v4()}.${metadata.format}`;
     const imageUploadPath = path.join(POST_FOLDER_PATH, userId.toString());
-    
-    // dir_principal/public/uploads/posts/$userId
+
     await fs.mkdir(imageUploadPath, { recursive: true });
     await image.toFile(path.join(imageUploadPath, imageFileName));
   } catch (e) {
-    return res.status(500).send({
-      message: `Error creating folder to store the image: ${e.message}`,
-    });
+    return res.status(500).send([
+      {
+        status: '500',
+        message: `Error creating folder to store the image: ${e.message}`,
+      },
+    ]);
   }
 
-  // paso 3: insertar el post en la bbdd
+  const now = new Date();
+  const created_at = now.toISOString().replace('T', ' ').substring(0, 19);
 
-  let connection;
+  const workout = {
+    ...workoutData,
+    image: imageFileName,
+    created_at,
+    user_id: userId,
+  };
+
+  const query = 'INSERT INTO ejercicio SET ?';
+
+  let connection = null;
   try {
-    const now = new Date();
-    const workout = {
-      name,
-      description,  // description: caption
-      image: imageFileName,
-      typology,
-      muscle,
-      created_at: now,
-      user_id: userId,
-    };
-
     connection = await mysqlPool.getConnection();
-    await connection.query('INSERT INTO ejercicio SET ?', workout);
+    await connection.query(query, workout);
     connection.release();
 
-    res.header('Location', `${process.env.HTTP_SERVER_DOMAIN}/uploads/workout/${userId}/${imageFileName}`);
-    return res.status(201).send();
+    res.header(
+      'Location',
+      `${process.env.HTTP_SERVER_DOMAIN}/uploads/workout/${userId}/${imageFileName}`
+    );
+    const { user_id, ...workoutCopy } = workout;
+    return res
+      .status(201)
+      .send([
+        { status: '201', message: 'workout created' },
+        { ...workoutCopy },
+      ]);
   } catch (e) {
     if (connection) {
       connection.release();
     }
-
-    console.log(e);
-    return res.status(500).send(e.message);
+    return res.status(500).send([{ status: '500', message: e.message }]);
   }
 }
 

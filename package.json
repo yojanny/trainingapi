@@ -4,7 +4,8 @@
   "description": "Api de entrenamiento de gimnasio para creación y modificación de ejercicios de entrenamientos para un gimnasio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/yojanny/trainingapi#readme",
   "devDependencies": {
     "eslint": "^8.21.0",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1"
   },
