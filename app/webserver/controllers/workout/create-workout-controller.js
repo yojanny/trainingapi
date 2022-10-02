@@ -8,7 +8,7 @@ const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
 
 const { validateWorkout } = require('../../shared/validate-schemas');
 
-const POST_VALID_FORMATS = ['jpeg', 'png'];
+const POST_VALID_FORMATS = ['jpeg', 'png', 'gif'];
 const MAX_IMAGE_WIDTH = 600;
 
 const PROJECT_MAIN_FOLDER_PATH = process.cwd();
