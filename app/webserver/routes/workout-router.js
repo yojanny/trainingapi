@@ -24,7 +24,12 @@ router.post(
   upload.single('image'),
   createWorkout
 );
-router.delete('/workouts/:workoutId', checkAccountSession, deleteWorkout);
+router.delete(
+  '/workouts/:workoutId',
+  checkAccountSession,
+  checkAccountPermissions,
+  deleteWorkout
+);
 router.get('/workouts', checkAccountSession, getWorkouts);
 router.get('/workouts/:workoutId', checkAccountSession, getWorkoutDetails);
 router.get(

@@ -28,8 +28,8 @@ async function createAccount(req, res) {
       email: accountData.email,
       password: securePassword,
       created_at: createdAt,
-      //role: 'admin',
-      role: 'member',
+      role: 'admin',
+      //role: 'member',
     };
 
     await connection.query('INSERT INTO users SET ?', user);

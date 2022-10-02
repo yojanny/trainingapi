@@ -19,10 +19,10 @@ async function validateWorkoutId(payload) {
 
 async function validateWorkout(payload) {
   const schema = Joi.object({
-    description: Joi.string().min(16).max(128).required(),
+    description: Joi.string().min(16).max(255).required(),
     name: Joi.string().min(3).max(30).required(),
     typology: Joi.string().min(3).max(30).required(),
-    muscle: Joi.string().min(3).max(30).required(),
+    muscle: Joi.string().min(3).max(60).required(),
   });
 
   Joi.assert(payload, schema);
@@ -30,7 +30,7 @@ async function validateWorkout(payload) {
 
 async function validateWorkoutUpdate(payload) {
   const schema = Joi.object({
-    description: Joi.string().min(16).max(128).allow(''),
+    description: Joi.string().min(16).max(255).allow(''),
     name: Joi.string().min(3).max(30).allow(''),
     typology: Joi.string().min(3).max(30).allow(''),
     muscle: Joi.string().min(3).max(30).allow(''),
