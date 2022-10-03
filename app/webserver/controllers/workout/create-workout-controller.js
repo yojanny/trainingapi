@@ -66,7 +66,7 @@ async function createWorkout(req, res, next) {
     }
 
     imageFileName = `${v4()}.${metadata.format}`;
-    const imageUploadPath = path.join(POST_FOLDER_PATH, userId.toString());
+    const imageUploadPath = path.join(POST_FOLDER_PATH);
 
     await fs.mkdir(imageUploadPath, { recursive: true });
     await image.toFile(path.join(imageUploadPath, imageFileName));
@@ -99,7 +99,7 @@ async function createWorkout(req, res, next) {
 
     res.header(
       'Location',
-      `${process.env.HTTP_SERVER_DOMAIN}/uploads/workout/${userId}/${imageFileName}`
+      `${process.env.HTTP_SERVER_DOMAIN}/uploads/workouts/${imageFileName}`
     );
     const { user_id, ...workoutCopy } = workout;
     return res

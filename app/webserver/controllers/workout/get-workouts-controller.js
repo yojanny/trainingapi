@@ -3,7 +3,7 @@
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
 
 async function getWorkouts(req, res) {
-  const query = `SELECT name, id, image FROM ejercicio`;
+  const query = `SELECT name, id, image, muscle FROM ejercicio`;
 
   let connection = null;
   try {
