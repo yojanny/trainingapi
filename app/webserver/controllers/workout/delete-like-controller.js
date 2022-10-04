@@ -25,7 +25,6 @@ async function dislikeWorkout(req, res) {
     connection = await mysqlPool.getConnection();
 
     const [rows] = await connection.execute(query, [userId, workoutId]);
-    console.log(rows);
     connection.release();
 
     const { affectedRows } = rows;
@@ -41,7 +40,10 @@ async function dislikeWorkout(req, res) {
 
     return res
       .status(200)
-      .send([{ status: '200', message: 'workout like deleted' }, { workoutId }]);
+      .send([
+        { status: '200', message: 'workout like deleted' },
+        { workoutId },
+      ]);
   } catch (e) {
     if (connection) {
       connection.release();

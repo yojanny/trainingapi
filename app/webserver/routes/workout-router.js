@@ -25,7 +25,7 @@ router.post(
   createWorkout
 );
 router.delete(
-  '/workouts/:workoutId',
+  '/workout/:workoutId',
   checkAccountSession,
   checkAccountPermissions,
   deleteWorkout
@@ -37,8 +37,8 @@ router.get(
   checkAccountSession,
   getWorkoutFilter
 );
-router.post('/workout/:workoutId/like', checkAccountSession, postLike);
-router.delete('/workout/:workoutId/like', checkAccountSession, deleteLike);
+router.post('/workout/like/:workoutId', checkAccountSession, postLike);
+router.delete('/workout/like/:workoutId', checkAccountSession, deleteLike);
 router.patch(
   '/workout/:workoutId',
   checkAccountSession,
