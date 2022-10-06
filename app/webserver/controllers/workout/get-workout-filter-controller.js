@@ -6,17 +6,13 @@ async function getWorkoutFilter(req, res) {
   const { workoutFilter } = req.params;
   const { workoutParam } = req.params;
 
-  /* let query = `SELECT * FROM ejercicio WHERE ${workoutFilter} = ?`; */
-
-  let query = '';
-
   let connection = null;
   try {
     connection = await mysqlPool.getConnection();
 
     const workoutFiltered = await connection.query(
-      `SELECT * FROM ejercicio WHERE ${workoutFilter} = ?`,
-      workoutParam
+      `SELECT * FROM ejercicio WHERE ${workoutFilter} LIKE ?`,
+      `%${workoutParam}%`
     );
 
     /* const [workoutData] = await connection.execute(
@@ -26,12 +22,7 @@ async function getWorkoutFilter(req, res) {
     ); */
     connection.release();
 
-    return res
-      .status(200)
-      .send([
-        { status: 200, message: 'workouts filtered' },
-        workoutFiltered[0],
-      ]);
+    return res.status(200).send({ status: 'ok', data: workoutFiltered[0] });
   } catch (e) {
     if (connection) {
       connection.release();

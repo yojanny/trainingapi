@@ -8,7 +8,7 @@ const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
 
 const { validateWorkoutUpdate } = require('../../shared/validate-schemas');
 
-const POST_VALID_FORMATS = ['jpeg', 'png'];
+const POST_VALID_FORMATS = ['jpeg', 'png', 'gif'];
 const MAX_IMAGE_WIDTH = 600;
 
 const PROJECT_MAIN_FOLDER_PATH = process.cwd();
@@ -59,7 +59,7 @@ async function updateWorkout(req, res, next) {
       }
 
       imageFileName = `${v4()}.${metadata.format}`;
-      const imageUploadPath = path.join(POST_FOLDER_PATH, userId.toString());
+      const imageUploadPath = path.join(POST_FOLDER_PATH);
 
       await fs.mkdir(imageUploadPath, { recursive: true });
       await image.toFile(path.join(imageUploadPath, imageFileName));
