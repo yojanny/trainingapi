@@ -12,6 +12,7 @@ const postLike = require('../controllers/workout/post-like-controller');
 const deleteLike = require('../controllers/workout/delete-like-controller');
 const updateWorkout = require('../controllers/workout/update-workout-controller');
 const checkAccountPermissions = require('../controllers/account/check-account-permissions');
+const getWorkoutsFav = require('../controllers/workout/get-workouts-fav-controller');
 
 const upload = multer();
 
@@ -46,5 +47,6 @@ router.patch(
   upload.single('image'),
   updateWorkout
 );
+router.get('/workoutsFav', checkAccountSession, getWorkoutsFav);
 
 module.exports = router;
