@@ -62,11 +62,11 @@ async function login(req, res, next) {
 
     const userSession = {
       accesToken: token,
-      expiresIn: 3600,
+      expiresIn: jwtExpiresIn,
     };
 
     res.status(200).send([
-      { 
+      {
         status: '200',
         message: 'user logged',
       },

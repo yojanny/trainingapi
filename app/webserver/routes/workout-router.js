@@ -48,5 +48,6 @@ router.patch(
   updateWorkout
 );
 router.get('/workoutsFav', checkAccountSession, getWorkoutsFav);
+router.get('/workoutFav', checkAccountSession, getWorkoutsFav);
 
 module.exports = router;

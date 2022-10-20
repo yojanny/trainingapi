@@ -13,8 +13,6 @@ async function getWorkoutsFav(req, res) {
     const [workoutsListFav] = await connection.execute(query, [userId]);
     connection.release();
 
-    console.log(workoutsListFav);
-
     return res.status(200).send({ status: 'ok', data: workoutsListFav });
   } catch (e) {
     if (connection) {

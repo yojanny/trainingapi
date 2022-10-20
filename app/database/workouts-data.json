@@ -1,0 +1,79 @@
+    [
+        {
+            "name": "farmer's carry",
+            "description": "take short and quick steps forward for a set distance holding the dumbells. lower the dumbells down to the floor, take a short break and repeat on the way back",
+            "image":"./images/farmers-carry.gif",
+            "typology": "dumbbell",
+            "muscle": "full body workout"         
+        },
+        {
+            "name": "dead lift dumbbell",
+            "description": "squeeze your glutes and tighten your las. exhale and lift the dumbbells until standing up straight. rotate your shoulders back until feeling slightly streched. pause for a count, inhale and return to the starting position",
+            "image":"./images/dead-lift-dumbbell.gif",
+            "typology": "dumbbell",
+            "muscle": "glutes, lower back, quadriceps, hasmstrings"         
+        },
+        {
+            "name": "bench press barbell",
+            "description": "exhale and squeeze yor chest to push the bar up to extend your arms straight. inhale and slowly lower your bar to the starting position and repeat",
+            "image":"./images/bench-press-barbell.gif",
+            "typology": "barbell, flat bench",
+            "muscle": "chest, triceps, shoulders"         
+        },
+        {
+            "name": "squat barbell",
+            "description": "exhale and squat down until your thighs are parallel to the floor. hold for a count to feel the contraction. inhale, drive through the heels and midfoot to the starting position slowly and repeat.",
+            "image":"./images/squat-barbell.gif",
+            "typology": "barbell",
+            "muscle": "quadriceps, glutes"         
+        },
+        {
+            "name": "bent-over row barbell",
+            "description": "exhale and squeeze your lats muscle to lift the barbell up towards your rib cage. pause for a count, inhale, slowly lower the barbell to the starting position and repeat.",
+            "image":"./images/bent-over-row-barbell.gif",
+            "typology": "barbell",
+            "muscle": "back, traps, biceps"         
+        },
+        {
+            "name": "front raise barbell",
+            "description": "exhale and lift the bar forward to the height of your shoulders. pause for a count, inhale and return to the starting position slowly and repeat",
+            "image":"./images/front-raise-barbell.gif",
+            "typology": "barbell",
+            "muscle": "shoulders"         
+        },
+        {
+            "name": "push-up",
+            "description": "inhale and bend the elbows to lower your body down until you chest almost touches the floor. exhale and raise your body back to the starting position and repeat.",
+            "image":"./images/push-up.gif",
+            "typology": "bodyweight",
+            "muscle": "chest,shoulders,triceps"         
+        },
+        {
+            "name": "backward lunge barbell",
+            "description": "inhale and take a big step backward with one leg and lower your body, until the working knee almost down on the floor with the opposite leg bent. exhale and return to the starting position and complete alternating between",
+            "image":"./images/backward-lunge-barbell.gif",
+            "typology": "barbell",
+            "muscle": "glutes, quadriceps, hasmstrings"         
+        },
+        {
+            "name": "cable pull through",
+            "description": "squeeze your glutes. pull the rope through your legs and drive you torso upward until standing up stright. return to the starting postion slowly and repeat.",
+            "image":"./images/cable-pull-through.gif",
+            "typology": "cable machine",
+            "muscle": "glutes, lower back, quadriceps, hasmstrings"         
+        },
+        {
+            "name": "chest dip",
+            "description": "bend your elbows and tilt forward to lower yourself until your upper arms are parallel to the floor. pause for a few seconds and push yourself up to the starting position slowly and repeat.",
+            "image":"./images/cable-pull-through.gif",
+            "typology": "cable machine",
+            "muscle": "glutes, lower back, quadriceps, hasmstrings"         
+        },
+        {
+            "name": "chest dip",
+            "description": "bend your elbows and tilt forward to lower yourself until your upper arms are parallel to the floor. pause for a few seconds and push yourself up to the starting position slowly and repeat.",
+            "image":"./images/cable-pull-through.gif",
+            "typology": "cable machine",
+            "muscle": "glutes, lower back, quadriceps, hasmstrings"         
+        }
+    ]

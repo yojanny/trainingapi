@@ -3,8 +3,7 @@
 const mysqlPool = require('../../../database/mysql-pool/mysql-pool');
 
 async function getWorkoutFilter(req, res) {
-  const { workoutFilter } = req.params;
-  const { workoutParam } = req.params;
+  const { workoutFilter, workoutParam } = req.params;
 
   let connection = null;
   try {
